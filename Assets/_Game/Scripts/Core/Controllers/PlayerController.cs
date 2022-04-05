@@ -44,6 +44,10 @@ namespace Nirville
         {
             horizontalInput = Input.GetAxis(horizontalAxisName);
             verticalInput = Input.GetAxis(verticalAxisName);
+
+            if (Input.GetButtonDown("Jump") && isGrounded) Jump();
+            if (Input.GetButtonDown("Vertical")) AnimationEvents.current.WalkForward();
+            if (Input.GetButtonUp("Vertical")) AnimationEvents.current.Idle();
         }
 
         void FixedUpdate()
@@ -51,13 +55,19 @@ namespace Nirville
             Move();
             Turn();
             GroundedCheck();
-            if (Input.GetButtonDown("Jump") && isGrounded) Jump();
+
+            //KeyboardInputs
         }
 
         private void Move()
         {
             Vector3 movement = transform.forward * verticalInput * moveSpeed * Time.deltaTime;
             playerRigibody.MovePosition(playerRigibody.position + movement);
+
+            // if (verticalInput != 0)
+            //     AnimationEvents.current.WalkForward();
+            // else
+            //     AnimationEvents.current.Idle();
         }
 
         private void Turn()
