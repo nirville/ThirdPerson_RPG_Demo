@@ -42,9 +42,12 @@ namespace Nirville
 
         void Update()
         {
+            
+            //Input Axes for WASD movement
             horizontalInput = Input.GetAxis(horizontalAxisName);
             verticalInput = Input.GetAxis(verticalAxisName);
 
+            //KeyboardInputs for registering Animations
             if (Input.GetButtonDown("Jump") && isGrounded) Jump();
             if (Input.GetButtonDown("Vertical")) AnimationEvents.current.WalkForward();
             if (Input.GetButtonUp("Vertical")) AnimationEvents.current.Idle();
@@ -55,19 +58,12 @@ namespace Nirville
             Move();
             Turn();
             GroundedCheck();
-
-            //KeyboardInputs
         }
 
         private void Move()
         {
             Vector3 movement = transform.forward * verticalInput * moveSpeed * Time.deltaTime;
             playerRigibody.MovePosition(playerRigibody.position + movement);
-
-            // if (verticalInput != 0)
-            //     AnimationEvents.current.WalkForward();
-            // else
-            //     AnimationEvents.current.Idle();
         }
 
         private void Turn()

@@ -18,7 +18,7 @@ public class HumanoidAnimationController : MonoBehaviour
 
     void OnJump()
     {
-
+        //Jump Animation
     }
 
     void OnIdle()
